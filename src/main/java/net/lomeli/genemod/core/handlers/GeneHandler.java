@@ -52,7 +52,7 @@ public class GeneHandler {
             List<ITrait> traits = GeneManager.INSTANCE.generateRandomTraits();
             for (ITrait gene : traits) {
                 float efficacy = rand.nextFloat() * gene.maxNaturalEfficacy();
-                if (gene.defaultTrait() && efficacy == 0f) efficacy += 0.01f;
+                if (gene.defaultTrait() && efficacy == 0f) efficacy = 0.01f;
 
                 if (efficacy == 0)
                     continue;
@@ -65,9 +65,7 @@ public class GeneHandler {
                 if (gene == null)
                     continue;
 
-                float efficacy = nbt.getFloat(key);
-                if (GeneManager.INSTANCE.getTrait(key) != null)
-                    geneHandler.setTrait(gene.getTraitID(), efficacy);
+                geneHandler.setTrait(gene.getTraitID(), nbt.getFloat(key));
             }
         }
 
